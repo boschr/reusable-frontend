@@ -1,0 +1,12 @@
+{
+  "name": "@bit/nerds.js.components.cookie-banner",
+  "version": "0.0.9",
+  "homepage": "https://bitsrc.io/nerds/js/components/cookie-banner",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@bit/boschr.js.utils.cookie": "file:../../utils/cookie"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE"
+}

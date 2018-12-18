@@ -1,0 +1,98 @@
+.rte {
+  &::after {
+    @extend %clearfix;
+  }
+
+  iframe,
+  img {
+    max-width: 100%;
+  }
+
+  figure {
+    @include responsive-spacing(margin-bottom);
+  }
+
+  figcaption {
+    @include responsive-spacing(padding-top, small);
+    color: pal-color(gray);
+    font-size: font-size(small);
+    font-style: italic;
+  }
+
+  strong {
+    color: pal-color(red);
+  }
+
+  a:not([class]) {
+    color: pal-color(blue);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  blockquote {
+    @include spacing(margin-vertical, small);
+    @include spacing(padding-horizontal, small);
+    width: 50%;
+    float: left;
+    border-left: solid 8px pal-color(red);
+    color: pal-color(red);
+    font-family: font-family(blockquote);
+    font-size: font-size(medium);
+    text-transform: uppercase;
+  }
+
+  table {
+    @include spacing(margin-vertical, small);
+    width: 100%;
+    table-layout: fixed; // resizes large images on ie11
+    border-spacing: 2px;
+    border-collapse: separate;
+    color: pal-color(gray, dark);
+
+    thead th {
+      background-color: pal-color(gray, light);
+      font-family: font-family(table-head);
+      font-size: font-size(tiny);
+      text-transform: uppercase;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      background-color: pal-color(gray, lightest);
+    }
+  }
+
+  // [target="_blank"] {
+
+  // }
+
+  @include media-breakpoint-down(md) {
+    blockquote {
+      width: 100%;
+      font-size: font-size(medium) * .8;
+    }
+
+    table {
+      display: block;
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
+      background-repeat: no-repeat;
+      background-position: top 2px right;
+      background-size: 25px calc(100% - 4px);
+
+      td {
+        background: rgba(0, 0, 0, .05);
+      }
+
+      tr td:last-child {
+        padding-right: 30px;
+      }
+    }
+  }
+}

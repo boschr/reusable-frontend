@@ -1,0 +1,20 @@
+linters:
+  PropertySortOrder:
+    enabled: true
+    order: smacss
+    ignore_unspecified: false
+    min_properties: 2
+    separate_groups: false
+  ColorKeyword:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  SelectorFormat:
+    enabled: true
+    convention: hyphenated_BEM
+  NestingDepth:
+    max_depth: 4
+  SelectorDepth:
+    max_depth: 4
+  DeclarationOrder:
+    enabled: false

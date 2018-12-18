@@ -1,0 +1,22 @@
+@mixin spacing($property, $value: base, $value-alt: $value) {
+  $base-value-1: map-get($map-spacing, $value);
+  $base-value-2: map-get($map-spacing, $value-alt);
+
+  @each $media, $factor in $map-media-spacing-factor {
+    @include media-breakpoint-only($media) {
+      @if(ends-with($property, '-vertical')) {
+        #{str-replace($property, '-vertical', '-top')}: $base-value-1 * $factor;
+        #{str-replace($property, '-vertical', '-bottom')}: $base-value-2 * $factor;
+      } @else if(ends-with($property, '-horizontal')) {
+        #{str-replace($property, '-horizontal', '-right')}: $base-value-1 * $factor;
+        #{str-replace($property, '-horizontal', '-left')}: $base-value-2 * $factor;
+      } @else {
+        @if $base-value-1 == $base-value-2 {
+          #{$property}: $base-value-1 * $factor;
+        } @else {
+          #{$property}: ($base-value-1 * $factor) ($base-value-2 * $factor);
+        }
+      }
+    }
+  }
+}

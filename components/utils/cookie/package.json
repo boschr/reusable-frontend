@@ -1,0 +1,10 @@
+{
+  "name": "@bit/boschr.js.utils.cookie",
+  "version": "0.0.7",
+  "homepage": "https://bitsrc.io/boschr/js/utils/cookie",
+  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE"
+}

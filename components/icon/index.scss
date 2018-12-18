@@ -1,0 +1,59 @@
+@mixin icon-size-variant($name, $size) {
+  &--#{$name} {
+    width: $size;
+    height: $size;
+  }
+}
+
+@mixin icon-color-variant($color) {
+  &--#{$color} svg {
+    @include paint-svg(emo-color($color));
+  }
+}
+
+@mixin icon-rotate-variant($rotation) {
+  &--#{$rotation}cw svg {
+    overflow: visible;
+    transform: rotate(#{$rotation}deg);
+  }
+}
+
+.icon {
+  display: inline-block;
+  position: relative;
+  width: $icon-size-default;
+  height: $icon-size-default;
+  line-height: 0;
+  vertical-align: middle;
+
+  svg {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    pointer-events: none; // IE fix
+  }
+
+  &--inline {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  // scss-lint:disable DeclarationOrder
+  @include icon-rotate-variant(45);
+  @include icon-rotate-variant(90);
+  @include icon-rotate-variant(135);
+  @include icon-rotate-variant(180);
+  @include icon-rotate-variant(225);
+  @include icon-rotate-variant(270);
+  @include icon-rotate-variant(315);
+
+  @include icon-size-variant(small, $icon-size-small);
+
+  @include icon-color-variant(light);
+  @include icon-color-variant(assertive);
+  @include icon-color-variant(energized);
+  @include icon-color-variant(balanced);
+  @include icon-color-variant(stable);
+  // scss-lint:enable DeclarationOrder
+}

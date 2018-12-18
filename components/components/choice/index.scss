@@ -1,0 +1,109 @@
+.choice {
+  $_choice_transition-duration:   .3s !default;
+  $_choice-size:                  20px !default;
+  $_choice-inline-space-between:  $_choice-size !default;
+  $_choice-border-color:          #000 !default;
+  $_choice-background-color:      #fff !default;
+  $_choice-border-radius:         3px !default;
+  $_choice-height:                50px !default;
+  $_choice-checked-color:         #f00 !default;
+  $_choice-border-width:          1px !default;
+  $_choice-indent:                $_choice-size * 1.5 !default;
+
+  display: flex;
+  position: relative;
+  min-height: $_choice-height;
+  margin-bottom: 0;
+
+  &--inline {
+    display: inline-flex;
+    margin-right: $_choice-inline-space-between;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &[disabled] + span {
+      opacity: .6;
+    }
+
+    &:checked + span::after {
+      transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  span {
+    display: block;
+    position: relative;
+    pointer-events: none;
+    align-self: center;
+    padding-left: $_choice-indent;
+
+    a {
+      pointer-events: auto;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      top: 50%;
+      display: block;
+      position: absolute;
+    }
+
+    &::before {
+      left: 0;
+      width: $_choice-size;
+      height: $_choice-size;
+      transform: translateY(-50%);
+      border: solid $_choice-border-width $_choice-border-color;
+      background-color: pal-color(white);
+    }
+
+    &::after {
+      left: $_choice-size / 2;
+      width: 13px;
+      transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+      transition: transform $_choice-transition-duration;
+      opacity: 0;
+    }
+  }
+
+  [type="checkbox"] ~ span {
+    &::before {
+      border-radius: $_choice-border-radius;
+    }
+
+    &::after {
+      height: 6px;
+      border-bottom: solid 1.5px $_choice-checked-color;
+      border-left: solid 1.5px $_choice-checked-color;
+    }
+  }
+
+  [type="radio"] ~ span {
+    &::before {
+      border-radius: 50%;
+    }
+
+    &::after {
+      height: 13px;
+      border-radius: 50%;
+      background-color: $_choice-checked-color;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "env": {},
+    "dependencies": {
+        "boschr.scss/components/choice": "0.0.3",
+        "boschr.js/utils/cookie": "0.0.7",
+        "nerds.js/components/cookie-banner": "0.0.9"
+    },
+    "componentsDefaultDirectory": "components/{namespace}/{name}",
+    "packageManager": "npm"
+}

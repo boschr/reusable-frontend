@@ -1,0 +1,10 @@
+{
+  "name": "@bit/boschr.scss.components.choice",
+  "version": "0.0.3",
+  "homepage": "https://bitsrc.io/boschr/scss/components/choice",
+  "main": "index.scss",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE"
+}

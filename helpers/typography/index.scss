@@ -1,0 +1,87 @@
+$types: (
+  base: (
+    properties: (
+      font-family: 'Times new roman',
+      font-size: 16px,
+    ),
+  ),
+  heading: (
+    properties: (
+      text-transform: uppercase,
+      font-family: Verdana,
+      color: red,
+    ),
+  ),
+  h1: (
+    extend: heading,
+    properties: (
+      font-size: 40px,
+    ),
+  ),
+  h2: (
+    extend: heading,
+    properties: (
+      font-size: 20px,
+    ),
+  ),
+  label: (
+    extend: h1,
+    properties: (
+      color: blue,
+      font-weight: bold,
+    ),
+  ),
+  test: (
+    extend: label,
+  ),
+);
+
+$list: ();
+@each $name, $typeMap in $types {
+  $placeholder: map-get($typeMap, extend);
+
+  @if $placeholder and index($list, $placeholder) == null {
+    $list: append($list, $placeholder);
+    $properties: map-get(map-get($types, $placeholder), properties);
+
+    @if $properties {
+      %#{$placeholder} {
+        @each $key, $value in $properties {
+          #{$key}: $value;
+        }
+      }
+    }
+  }
+}
+
+@function getExtendList($extend) {
+  $list: ($extend);
+
+  $typeToExtend: map-get($types, $extend);
+  $parentExtend: map-get($typeToExtend, extend);
+
+  @for $i from 1 through length($list) {
+    @if $parentExtend {
+      $list: join($list, getExtendList($parentExtend));
+    }
+  }
+
+  @return $list;
+}
+
+@mixin typography($type: 'base') {
+  $typeMap: map-get($types, $type);
+  $typeExtend: map-get($typeMap, extend);
+
+  @if $typeExtend {
+    $recursiveExtend: getExtendList($typeExtend);
+
+    @each $extend in $recursiveExtend {
+      @extend %#{$extend};
+    }
+  }
+
+  @each $key, $value in map-get($typeMap, properties) {
+    #{$key}: $value;
+  }
+}

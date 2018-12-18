@@ -1,0 +1,200 @@
+.mobile-navigation {
+  .has-children {
+    > a::before {
+      @extend %pseudo-chevron-right;
+      content: none;
+    }
+  }
+
+  & &__parent-title a::before {
+    @extend %pseudo-chevron-left;
+    content: none;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  $_height:               100px;
+  $_font-family:          Arial;
+  $_font-size:            12px;
+  $_font-weight:          700;
+  $_color:                #000;
+  $_border-color:         #e8e8e8;
+  $_transition-duration:  .3s;
+  $_color-active:         #ff6000;
+  $_border-color-active:  $_color-active;
+  $_border-active:        6px;
+
+  %nav-arrow-square {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+  }
+
+  .mobile-navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 100%;
+    height: 100vh;
+    padding-top: $_height;
+    overflow-y: scroll;
+    transition: height $_transition-duration,
+                opacity $_transition-duration,
+                left 0s $_transition-duration;
+    opacity: 0;
+    font-family: $_font-family;
+    font-size: $_font-size;
+    font-weight: $_font-weight;
+    text-transform: uppercase;
+    pointer-events: none;
+
+    ul {
+      display: inline-block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .is-collapsed + & {
+      left: 0;
+      transition: opacity $_transition-duration, left 0s;
+      opacity: 1;
+
+      > ul {
+        display: block;
+      }
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: $_height;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: pal-color(white);
+    }
+
+    > ul {
+      display: none;
+      position: fixed;
+      top: $_height;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      pointer-events: initial;
+    }
+
+    li {
+      display: block;
+      position: relative;
+      width: 100%;
+      padding-left: 0;
+      border-top: 0;
+      border-bottom: solid 1px $_border-color;
+      white-space: initial;
+
+      &.is-active {
+        border-left: solid $_border-active $_border-color-active;
+
+        a {
+          color: $_color-active;
+        }
+      }
+
+      &.is-collapsed {
+        &::after {
+          content: '';
+          position: fixed;
+          z-index: 1;
+          top: $_height;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: rgba(pal-color(black), .5);
+        }
+
+        > ul {
+          left: 10%;
+        }
+
+        .is-collapsed > ul {
+          left: 20%;
+        }
+      }
+
+      &.has-children {
+        &::before {
+          @extend %nav-arrow-square;
+          right: 0;
+          border-left: solid 1px $_border-color;
+        }
+
+        > a::before {
+          content: '';
+          right: 33px;
+        }
+      }
+    }
+
+    a {
+      display: block;
+      position: relative;
+      padding-left: 25px;
+      border-top: 0;
+      border-bottom: 0;
+      color: $_color;
+      line-height: 60px;
+      text-decoration: none;
+      white-space: nowrap;
+
+      &[target="_blank"]::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 33px;
+        width: 10px;
+        height: 10px;
+        transform: translate(50%, -50%);
+        background-repeat: no-repeat;
+      }
+    }
+
+    ul ul { // scss-lint:disable MergeableSelector
+      position: fixed;
+      z-index: 2;
+      top: $_height;
+      bottom: 0;
+      left: 100%;
+      padding-right: 10%;
+      overflow: scroll;
+      transition: left .5s;
+      background-color: pal-color(white);
+    }
+
+    & &__parent-title {
+      position: relative;
+
+      &::before {
+        @extend %nav-arrow-square;
+        left: 0;
+        border-right: solid 1px $_border-color;
+      }
+
+      a {
+        padding-left: 80px;
+
+        &::before {
+          content: '';
+          left: 33px;
+        }
+      }
+    }
+  }
+}

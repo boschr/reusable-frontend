@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@bit/boschr.scss.components.choice": "file:./components/components/choice",
+    "@bit/boschr.js.utils.cookie": "file:./components/utils/cookie",
+    "@bit/nerds.js.components.cookie-banner": "file:./components/components/cookie-banner"
+  }
+}

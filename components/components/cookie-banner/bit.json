@@ -1,0 +1,5 @@
+{
+  "env": {
+    "compiler": "bit.envs/compilers/react@0.0.3"
+  }
+}
